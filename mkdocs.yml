@@ -1,0 +1,15 @@
+# flutter_articles
+
+name: flutter_articles
+
+# Configuração para GitHub Pages
+# O site será gerado a partir da pasta /docs
+
+site_name: Flutter Articles
+site_url: https://devtvas.github.io/flutter_articles/
+nav:
+  - Início: index.md
+
+# Tema básico
+theme:
+  name: material

@@ -1,3 +1,7 @@
+---
+marp: true
+---
+
 
 # 🚀 Flutter Offline-First na Prática: O Guia Completo com POO, Patterns e Arquitetura
 
