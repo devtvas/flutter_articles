@@ -9,19 +9,21 @@ site_name: Flutter Articles
 site_url: https://devtvas.github.io/flutter_articles/
 repo_url: https://github.com/devtvas/flutter_articles
 repo_name: devtvas/flutter_articles
+docs_dir: mkdocs_src
+site_dir: docs
 nav:
-  - 00 Objetivos: docs/00 Objetivos.md
-  - 05 Getting Started: docs/05 Getting Started.md
-  - 06 Offline-First: docs/06 Offline-First.md
-  - 10 Resultado (Definition of Done): docs/10 Resultado (Definition of Done).md
-  - 11 Ajuda rápida (links oficiais): docs/11 Ajuda rápida (links oficiais).md
-  - 12 Checklist de Prontidão: docs/12 Checklist de Prontidão.md
-  - 15 Pré-requisitos: docs/15 Pré-requisitos.md
-  - 20 Estrutura White-label & Schemes: docs/20 Estrutura White-label & Schemes.md
-  - 30 Runbook (Release manual): docs/30 Runbook (Release manual).md
-  - 40 Fastlane Guide: docs/40 Fastlane Guide.md
-  - 50 CI/CD Guide: docs/50 CI/CD Guide.md
-  - Início: docs/index.md
+  - 00 Objetivos: 00 Objetivos.md
+  - 05 Getting Started: 05 Getting Started.md
+  - 06 Offline-First: 06 Offline-First.md
+  - 10 Resultado (Definition of Done): 10 Resultado (Definition of Done).md
+  - 11 Ajuda rápida (links oficiais): 11 Ajuda rápida (links oficiais).md
+  - 12 Checklist de Prontidão: 12 Checklist de Prontidão.md
+  - 15 Pré-requisitos: 15 Pré-requisitos.md
+  - 20 Estrutura White-label & Schemes: 20 Estrutura White-label & Schemes.md
+  - 30 Runbook (Release manual): 30 Runbook (Release manual).md
+  - 40 Fastlane Guide: 40 Fastlane Guide.md
+  - 50 CI/CD Guide: 50 CI/CD Guide.md
+  - Início: index.md
 # Tema Material
 theme:
   name: material
