@@ -12,6 +12,7 @@ repo_name: devtvas/flutter_articles
 nav:
   - 00 Objetivos: docs/00 Objetivos.md
   - 05 Getting Started: docs/05 Getting Started.md
+  - 06 Offline-First: docs/06 Offline-First.md
   - 10 Resultado (Definition of Done): docs/10 Resultado (Definition of Done).md
   - 11 Ajuda rápida (links oficiais): docs/11 Ajuda rápida (links oficiais).md
   - 12 Checklist de Prontidão: docs/12 Checklist de Prontidão.md
