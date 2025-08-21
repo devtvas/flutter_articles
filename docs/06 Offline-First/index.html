@@ -1,0 +1,1371 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devtvas.github.io/flutter_articles/06%20Offline-First/">
+      
+      
+        <link rel="prev" href="../05%20Getting%20Started/">
+      
+      
+        <link rel="next" href="../10%20Resultado%20%28Definition%20of%20Done%29/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.17">
+    
+    
+      
+        <title>06 Offline-First - Flutter Articles</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flutter-offline-first-na-pratica-o-guia-completo-com-poo-patterns-e-arquitetura" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Flutter Articles" class="md-header__button md-logo" aria-label="Flutter Articles" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Flutter Articles
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              06 Offline-First
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/devtvas/flutter_articles" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    devtvas/flutter_articles
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Flutter Articles" class="md-nav__button md-logo" aria-label="Flutter Articles" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Flutter Articles
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/devtvas/flutter_articles" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    devtvas/flutter_articles
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00%20Objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    00 Objetivos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20Getting%20Started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    06 Offline-First
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 Offline-First
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      🩺 O Problema Real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-programacao-orientada-a-objetos-poo-aplicada-no-flutter" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Programação Orientada a Objetos (POO) aplicada no Flutter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Programação Orientada a Objetos (POO) aplicada no Flutter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceito
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicacao-linha-a-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicação linha a linha
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modelagem-de-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Modelagem de Entidades
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Modelagem de Entidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-encapsulamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Encapsulamento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Encapsulamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-polimorfismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Polimorfismo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Polimorfismo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Design Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategy-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observer-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observer (State Management)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-arquitetura-offline-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Arquitetura Offline-First
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comparacao-antes-vs-depois" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Comparação Antes vs Depois
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Comparação Antes vs Depois">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-sem-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Antes (sem patterns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depois-com-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Depois (com patterns)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Erros Comuns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cheat-sheet-resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Cheat Sheet (Resumo Final)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-perguntas-de-entrevista-com-respostas-curtas" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Perguntas de Entrevista (com respostas curtas)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10%20Resultado%20%28Definition%20of%20Done%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10 Resultado (Definition of Done)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11%20Ajuda%20r%C3%A1pida%20%28links%20oficiais%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11 Ajuda rápida (links oficiais)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12%20Checklist%20de%20Prontid%C3%A3o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12 Checklist de Prontidão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15%20Pr%C3%A9-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15 Pré-requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20%20Estrutura%20White-label%20%26%20Schemes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20 Estrutura White-label & Schemes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30%20Runbook%20%28Release%20manual%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    30 Runbook (Release manual)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../40%20Fastlane%20Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    40 Fastlane Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../50 CI/CD Guide.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    50 CI/CD Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      🩺 O Problema Real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-programacao-orientada-a-objetos-poo-aplicada-no-flutter" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Programação Orientada a Objetos (POO) aplicada no Flutter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Programação Orientada a Objetos (POO) aplicada no Flutter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceito
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicacao-linha-a-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicação linha a linha
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modelagem-de-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Modelagem de Entidades
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Modelagem de Entidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-encapsulamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Encapsulamento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Encapsulamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-polimorfismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Polimorfismo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Polimorfismo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogia
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Design Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategy-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observer-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observer (State Management)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-arquitetura-offline-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Arquitetura Offline-First
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comparacao-antes-vs-depois" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Comparação Antes vs Depois
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Comparação Antes vs Depois">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-sem-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Antes (sem patterns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depois-com-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Depois (com patterns)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Erros Comuns
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cheat-sheet-resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Cheat Sheet (Resumo Final)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-perguntas-de-entrevista-com-respostas-curtas" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Perguntas de Entrevista (com respostas curtas)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="flutter-offline-first-na-pratica-o-guia-completo-com-poo-patterns-e-arquitetura">🚀 Flutter Offline-First na Prática: O Guia Completo com POO, Patterns e Arquitetura</h1>
+<h2 id="o-problema-real">🩺 O Problema Real</h2>
+<p>Imagine o Dr. Carlos, médico de plantão em um hospital no interior.<br />
+Ele precisa emitir uma <strong>nota fiscal</strong> no app da clínica, mas a internet está oscilando.<br />
+Se o app falhar, ele perde tempo precioso — e pode até atrasar o repasse de seus honorários.  </p>
+<p>👉 É aqui que entra a <strong>arquitetura offline-first com Flutter</strong>, garantindo que o app funcione mesmo em condições ruins de conectividade.</p>
+<hr />
+<h2 id="1-programacao-orientada-a-objetos-poo-aplicada-no-flutter">1. Programação Orientada a Objetos (POO) aplicada no Flutter</h2>
+<h3 id="conceito">Conceito</h3>
+<p>POO ajuda a organizar o código em <strong>objetos com responsabilidades claras</strong>.</p>
+<h3 id="exemplo">Exemplo</h3>
+<pre><code class="language-dart">class User {
+  final String id;
+  final String name;
+
+  User(this.id, this.name);
+}
+</code></pre>
+<h3 id="analogia">Analogia</h3>
+<p>📌 Pense em uma <strong>carteira de identidade</strong>: ela encapsula (esconde) toda a burocracia por trás, mas te entrega apenas o que importa — seu nome, sua foto e seu número.</p>
+<h3 id="explicacao-linha-a-linha">Explicação linha a linha</h3>
+<ul>
+<li><code>class User</code>: define a entidade.  </li>
+<li><code>final</code>: imutável, segurança contra mudanças acidentais.  </li>
+<li>Construtor: garante que um <code>User</code> só existe se tiver <code>id</code> e <code>name</code>.  </li>
+</ul>
+<hr />
+<h2 id="2-modelagem-de-entidades">2. Modelagem de Entidades</h2>
+<h3 id="exemplo_1">Exemplo</h3>
+<pre><code class="language-dart">class DraftInvoice {
+  final String id;
+  final double amount;
+  bool synced;
+
+  DraftInvoice(this.id, this.amount, {this.synced = false});
+}
+</code></pre>
+<h3 id="analogia_1">Analogia</h3>
+<p>📌 Um <strong>rascunho de cheque</strong>: você escreve o valor, mas só quando for validado no banco (API) ele se torna oficial.</p>
+<hr />
+<h2 id="3-encapsulamento">3. Encapsulamento</h2>
+<h3 id="exemplo_2">Exemplo</h3>
+<pre><code class="language-dart">class LocalQueueService {
+  final List&lt;DraftInvoice&gt; _queue = [];
+
+  void add(DraftInvoice invoice) =&gt; _queue.add(invoice);
+
+  List&lt;DraftInvoice&gt; get pending =&gt; List.unmodifiable(_queue);
+}
+</code></pre>
+<h3 id="analogia_2">Analogia</h3>
+<p>📌 Uma <strong>caixa fechada</strong>: você pode colocar papéis (notas), mas só acessa de forma controlada, nunca direto no fundo da caixa.</p>
+<hr />
+<h2 id="4-polimorfismo">4. Polimorfismo</h2>
+<h3 id="exemplo_3">Exemplo</h3>
+<pre><code class="language-dart">abstract class SyncStrategy {
+  Future&lt;void&gt; sync(DraftInvoice invoice);
+}
+
+class AutoSync implements SyncStrategy {
+  @override
+  Future&lt;void&gt; sync(DraftInvoice invoice) async {
+    // sincroniza automaticamente
+  }
+}
+
+class ManualSync implements SyncStrategy {
+  @override
+  Future&lt;void&gt; sync(DraftInvoice invoice) async {
+    // depende de ação do usuário
+  }
+}
+</code></pre>
+<h3 id="analogia_3">Analogia</h3>
+<p>📌 Um <strong>carro com câmbio automático ou manual</strong>: a direção é a mesma, mas a forma de trocar marcha muda conforme a estratégia escolhida.</p>
+<hr />
+<h2 id="5-design-patterns">5. Design Patterns</h2>
+<h3 id="repository-pattern">Repository Pattern</h3>
+<pre><code class="language-dart">class InvoiceRepository {
+  final LocalQueueService local;
+  final ApiService remote;
+
+  InvoiceRepository(this.local, this.remote);
+}
+</code></pre>
+<p>📌 <strong>Biblioteca</strong>: você pede um livro (nota), e o bibliotecário decide se pega da prateleira local ou encomenda de fora.</p>
+<hr />
+<h3 id="strategy-pattern">Strategy Pattern</h3>
+<p>Mostrado acima com <code>SyncStrategy</code>.<br />
+📌 <strong>Motor de carro intercambiável</strong>: o mesmo chassi aceita motor elétrico ou a combustão.</p>
+<hr />
+<h3 id="observer-state-management">Observer (State Management)</h3>
+<pre><code class="language-dart">class InvoiceNotifier extends ChangeNotifier {
+  List&lt;DraftInvoice&gt; invoices = [];
+
+  void add(DraftInvoice invoice) {
+    invoices.add(invoice);
+    notifyListeners();
+  }
+}
+</code></pre>
+<p>📌 <strong>Grupo do WhatsApp</strong>: quando alguém manda mensagem (nota nova), todos recebem automaticamente.</p>
+<hr />
+<h2 id="6-arquitetura-offline-first">6. Arquitetura Offline-First</h2>
+<ul>
+<li><strong>Salvar primeiro localmente</strong>  </li>
+<li><strong>Sincronizar com backoff exponencial</strong>  </li>
+<li><strong>Marcar stale (desatualizado)</strong> até confirmação  </li>
+</ul>
+<p>📌 <strong>Exemplo real</strong>: Como mandar mensagem no WhatsApp sem internet → aparece o relógio ⏳ e só vira check ✔ quando sincroniza.</p>
+<hr />
+<h2 id="7-comparacao-antes-vs-depois">7. Comparação Antes vs Depois</h2>
+<h3 id="antes-sem-patterns">Antes (sem patterns)</h3>
+<pre><code class="language-dart">// Lógica da API dentro da UI
+onPressed: () async {
+  final response = await ApiService().sendInvoice(invoice);
+  if (response.success) {
+    // atualizar UI
+  }
+}
+</code></pre>
+<h3 id="depois-com-patterns">Depois (com patterns)</h3>
+<pre><code class="language-dart">onPressed: () async {
+  await context.read&lt;InvoiceRepository&gt;().sync(invoice);
+}
+</code></pre>
+<p>👉 Resultado: UI mais limpa, testável e resiliente.</p>
+<hr />
+<h2 id="8-erros-comuns">8. Erros Comuns</h2>
+<ul>
+<li>❌ Salvar só local e esquecer de sincronizar  </li>
+<li>❌ Não marcar dados como stale → UI engana o usuário  </li>
+<li>❌ Retry sem backoff → flooda a API  </li>
+</ul>
+<hr />
+<h2 id="9-cheat-sheet-resumo-final">9. Cheat Sheet (Resumo Final)</h2>
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Exemplo Flutter</th>
+<th>Analogia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POO</td>
+<td><code>class User</code></td>
+<td>Carteira de identidade</td>
+</tr>
+<tr>
+<td>Encapsulamento</td>
+<td><code>LocalQueueService</code></td>
+<td>Caixa fechada</td>
+</tr>
+<tr>
+<td>Polimorfismo</td>
+<td><code>SyncStrategy</code></td>
+<td>Câmbio manual vs automático</td>
+</tr>
+<tr>
+<td>Repository</td>
+<td><code>InvoiceRepository</code></td>
+<td>Bibliotecário</td>
+</tr>
+<tr>
+<td>Strategy</td>
+<td><code>AutoSync/ManualSync</code></td>
+<td>Motor intercambiável</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td><code>ChangeNotifier</code></td>
+<td>Grupo do WhatsApp</td>
+</tr>
+<tr>
+<td>Offline-First</td>
+<td>Fila local + backoff</td>
+<td>WhatsApp offline</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-perguntas-de-entrevista-com-respostas-curtas">10. Perguntas de Entrevista (com respostas curtas)</h2>
+<ul>
+<li>
+<p><strong>Q:</strong> Como trataria falta de internet?<br />
+<strong>A:</strong> Offline-first → salva local, retry com backoff, feedback na UI.  </p>
+</li>
+<li>
+<p><strong>Q:</strong> Como separar lógica de persistência da UI?<br />
+<strong>A:</strong> Repository Pattern.  </p>
+</li>
+<li>
+<p><strong>Q:</strong> Como evitar flooding de API em conexões ruins?<br />
+<strong>A:</strong> Retry com backoff exponencial.  </p>
+</li>
+<li>
+<p><strong>Q:</strong> Como notificar a UI sobre mudanças automáticas?<br />
+<strong>A:</strong> Observer Pattern (ChangeNotifier, Bloc, Riverpod).  </p>
+</li>
+</ul>
+<hr />
+<p>💡 <strong>Sugestão de Pitch na entrevista:</strong>  </p>
+<blockquote>
+<p>“Se o médico perder a internet, meu app continua funcionando.<br />
+Ele salva a nota localmente, sincroniza depois e avisa na UI o que está atualizado ou não.<br />
+Isso reduz fricção e aumenta confiança no produto.”</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
